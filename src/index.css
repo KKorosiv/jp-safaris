@@ -1,0 +1,54 @@
+@import "tailwindcss";
+
+* {
+    scroll-behavior: smooth;
+  }
+/* Global Styles (if needed) */
+body {
+    font-family: 'Arial', sans-serif;
+  }
+  .typed-cursor {
+    display: none;
+  }
+  
+  .typed-text::after {
+    content: "|";  /* Single cursor */
+    font-weight: bold;
+    font-size: 1.2em;
+    color: #0a850d; /* Match your theme */
+    animation: blink 0.7s infinite alternate;
+  }
+  
+  /* Blinking Animation */
+  @keyframes blink {
+    from { opacity: 1; }
+    to { opacity: 0; }
+  }
+  
+  /* ✅ Button Styling */
+  button {
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    transform: scale(1.05);
+  }
+  
+  /* ✅ Image Slideshow Styling */
+  .slideshow img {
+    transition: opacity 0.8s ease-in-out;
+  }
+  
+  /* ✅ Section Spacing */
+  .section {
+    padding: 40px 20px;
+  }
+  
+  /* ✅ Responsive Fixes */
+  @media (max-width: 768px) {
+    h1 {
+      font-size: 2.5rem;
+    }
+  }
+  
