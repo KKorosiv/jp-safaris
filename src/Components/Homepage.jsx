@@ -25,19 +25,17 @@ const HomePage = () => {
 
   return (
     <div className="relative w-full overflow-hidden">
-      {/* Video Background */}
+  
       <div className="h-screen relative">
         <video autoPlay loop muted className="absolute top-0 left-0 w-full h-full object-cover">
-          <source src="/safari.mp4" type="video/mp4" />
+          <source src="/jp-travels/safari.mp4" type="video/mp4" />
         </video>
 
-        {/* Overlay */}
         <div className="absolute top-0 left-0 w-full h-full bg-green bg-opacity-30"></div>
 
-        {/* Hero Content */}
         <div className="relative z-10 flex flex-col items-center justify-center h-full text-center px-6">
           <h1 className="text-4xl md:text-6xl font-bold text-white drop-shadow-lg">
-            Explore The World with <span className="text-green-400">JP Travels</span>
+            Explore The World with <span className="text-green-400">JP Safaris</span>
           </h1>
           <p className="text-lg md:text-xl text-gray-200 mt-4 max-w-2xl">
             Discover breathtaking destinations, immerse yourself in new cultures, and create unforgettable memories. Adventure awaits!
@@ -45,12 +43,11 @@ const HomePage = () => {
         </div>
       </div>
 
-      {/* About Section */}
       <section className="max-w-6xl mx-auto px-6 py-12" data-aos="fade-up">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-green-600">Discover JP-Travels</h2>
+          <h2 className="text-3xl md:text-4xl font-bold text-green-600">Discover JP-Safaris</h2>
           <p className="text-lg leading-relaxed text-gray-700">
-            JP-Travels is dedicated to creating unforgettable safari experiences that 
+            JP-Safaris is dedicated to creating unforgettable safari experiences that 
             connect travelers with the breathtaking beauty of nature and wildlife. Our mission 
             is to provide exceptional service and memorable adventures, ensuring that every journey 
             is unique and enriching. We value integrity, customer satisfaction, sustainability, and 
@@ -59,10 +56,9 @@ const HomePage = () => {
         </div>
       </section>
 
-      {/* Stats Section */}
       <div ref={ref} className="container mx-auto px-6 py-12 flex flex-col lg:flex-row items-center gap-10" data-aos="fade-up">
         <div className="w-full lg:w-1/2">
-          <img src="/elephground.jpg" alt="Safari Tour" className="w-full h-auto rounded-lg shadow-lg" />
+          <img src="/jp-travels/elephground.jpg" alt="Safari Tour" className="w-full h-auto rounded-lg shadow-lg" />
         </div>
         <div className="w-full lg:w-1/2 grid grid-cols-1 md:grid-cols-2 gap-6">
           {[{ end: 150, text: "+ tours" }, { end: 5, text: "+ years" }, { end: 2000, text: "+ happy clients" }, { end: 30, text: "+ destinations" }].map((stat, index) => (
@@ -79,10 +75,9 @@ const HomePage = () => {
             </div>
           ))}
 
-          {/* "Start Your Journey" Button */}
           <div className="w-full mt-6 flex justify-start">
             <button
-              onClick={handleStartJourney} // Add the onClick event
+              onClick={handleStartJourney}
               className="px-6 py-3 bg-green-600 text-white font-semibold text-lg cursor-pointer rounded-lg shadow-lg hover:bg-green-400 transition duration-300"
             >
               Start Your Journey

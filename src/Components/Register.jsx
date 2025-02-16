@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useAuth } from "./AuthContext";
 import { useNavigate } from "react-router-dom";
+import axiosInstance from "../utils/axiosInstance";
 
 const Register = () => {
   const { login } = useAuth();
@@ -11,11 +12,21 @@ const Register = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    localStorage.setItem("user", JSON.stringify(formData));
-    login(formData);
-    navigate("/login");
+    try {
+      const response = await axiosInstance.post("/users/register", formData);
+      const user = response.data.user;
+
+    
+      login(user);
+
+      navigate("/login");
+      alert("Registration successful. Please log in.");
+    } catch (error) {
+      console.error("Registration error:", error);
+      alert("Error during registration. Please try again.");
+    }
   };
 
   return (
@@ -53,7 +64,7 @@ const Register = () => {
           Register
         </button>
 
-        {/* Align "Already have an account?" inside the form and center it */}
+
         <div className="flex justify-center items-center mt-4">
           <p className="text-center">
             Already have an account?{" "}

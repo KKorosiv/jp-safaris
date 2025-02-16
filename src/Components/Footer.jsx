@@ -8,7 +8,6 @@ const Footer = () => {
     AOS.init({ duration: 1000 });
   }, []);
 
-  // Function to scroll to the top of the page
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
@@ -19,13 +18,12 @@ const Footer = () => {
   return (
     <footer className="bg-gray-400 text-white py-10 relative" data-aos="fade-up">
       <div className="container mx-auto px-6 grid md:grid-cols-3 gap-8 text-center md:text-left">
-        {/* Company Info */}
+     
         <div>
-          <h2 className="text-2xl font-bold mb-3">JP-Travels</h2>
+          <h2 className="text-2xl font-bold mb-3">JP-Safaris</h2>
           <p className="text-gray-300">Explore Africa’s wonders with us. Your adventure begins here!</p>
         </div>
         
-        {/* Social Media Links */}
         <div>
           <h3 className="text-xl font-semibold mb-3">Follow Us</h3>
           <div className="flex justify-center md:justify-start space-x-4">
@@ -36,7 +34,6 @@ const Footer = () => {
           </div>
         </div>
         
-        {/* Customer Support */}
         <div>
           <h3 className="text-xl font-semibold mb-3">Customer Support</h3>
           <p className="text-gray-300">Need help? Call us:</p>
@@ -44,7 +41,6 @@ const Footer = () => {
         </div>
       </div>
 
-      {/* Scroll to Top Button */}
       <button 
         onClick={scrollToTop}
         className="absolute bottom-10 right-10 bg-green-400 p-3 rounded-full text-white hover:bg-green-600 transition"

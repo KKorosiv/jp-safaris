@@ -1,83 +1,116 @@
 import React, { useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 
 const BookingForm = () => {
+  const location = useLocation();
+  const tour = location.state?.selectedTour || {}; 
+
+  const [numPeople, setNumPeople] = useState(1);
+  const [days, setDays] = useState(1);
   const [formData, setFormData] = useState({
     name: "",
+    phone: "",
     email: "",
-    numberOfPeople: 1,
-    date: "",
-    tourPackage: "",
   });
+
+  const totalPrice = (tour.fee ? parseFloat(tour.fee.replace("$", "")) : 0) * numPeople * days;
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Submit form data or navigate to payment
-    console.log(formData);
-  };
-
   return (
-    <div className="min-h-screen flex justify-center items-center">
-      <form onSubmit={handleSubmit} className="p-6 bg-white shadow-lg rounded-md">
-        <div className="flex items-center gap-x-4">
-        <img src="/logo.png" alt="Sam-Henia Travels" className="h-10" />
-        <h2 className="text-2xl font-bold mb-4">Booking Form</h2>
-
-        </div>
+    <div className="max-w-5xl mx-auto py-10 px-6">
     
-        <input
-          type="text"
-          name="name"
-          placeholder="Your Name"
-          onChange={handleChange}
-          required
-          className="border p-2 w-full mb-2"
-        />
+      <div className="flex items-center gap-4 mb-6">
+        <img src="/jp-travels/logo-safaris.jpg" alt="Logo" className="w-12 h-12" />
+        <h2 className="text-2xl font-bold">Booking Details</h2>
+      </div>
 
-        <input
-          type="email"
-          name="email"
-          placeholder="Your Email"
-          onChange={handleChange}
-          required
-          className="border p-2 w-full mb-2"
-        />
+    
+      <div className="grid md:grid-cols-2 gap-8 bg-white p-6 rounded-lg shadow-md">
+   
+        <div>
+          {tour.image ? (
+            <img src={tour.image} alt={tour.title} className="w-full h-60 object-cover rounded-lg" />
+          ) : (
+            <div className="w-full h-60 bg-gray-200 flex items-center justify-center rounded-lg">
+              No Image Available
+            </div>
+          )}
+          <h3 className="text-xl font-semibold mt-4">{tour.title || "Tour Name"}</h3>
+          <p className="text-gray-600">{tour.description || "Tour description not available."}</p>
+          <p className="mt-2 font-bold">Location: {tour.location || "Not specified"}</p>
+          <p className="mt-1 font-bold">Price per person: ${tour.fee || "N/A"}</p>
+        </div>
 
-        <input
-          type="number"
-          name="numberOfPeople"
-          value={formData.numberOfPeople}
-          onChange={handleChange}
-          required
-          className="border p-2 w-full mb-2"
-        />
 
-        <input
-          type="date"
-          name="date"
-          value={formData.date}
-          onChange={handleChange}
-          required
-          className="border p-2 w-full mb-2"
-        />
+        <div className="space-y-4">
+          <input
+            type="text"
+            name="fullName"
+            placeholder="Full Name"
+            value={formData.fullName}
+            onChange={handleChange}
+            className="w-full p-2 border rounded-md"
+            required
+          />
+          <input
+            type="tel"
+            name="phone"
+            placeholder="Phone Number"
+            value={formData.phone}
+            onChange={handleChange}
+            className="w-full p-2 border rounded-md"
+            required
+          />
+          <input
+            type="email"
+            name="email"
+            placeholder="Email"
+            value={formData.email}
+            onChange={handleChange}
+            className="w-full p-2 border rounded-md"
+            required
+          />
+          <input
+            type="number"
+            placeholder="Number of People"
+            value={numPeople}
+            onChange={(e) => setNumPeople(Math.max(1, parseInt(e.target.value) || 1))}
+            className="w-full p-2 border rounded-md"
+            min="1"
+          />
+          <input
+            type="number"
+            placeholder="Days to Spend"
+            value={days}
+            onChange={(e) => setDays(Math.max(1, parseInt(e.target.value) || 1))}
+            className="w-full p-2 border rounded-md"
+            min="1"
+          />
 
-        <select
-          name="tourPackage"
-          value={formData.tourPackage}
-          onChange={handleChange}
-          className="border p-2 w-full mb-2"
-        >
-          <option value="">Select Tour Package</option>
-          <option value="tour1">Tour Package 1</option>
-          <option value="tour2">Tour Package 2</option>
-          <option value="tour3">Tour Package 3</option>
-        </select>
+          <p className="font-bold text-lg">Total Price: ${totalPrice.toFixed(2)}</p>
 
-        <button type="submit" className="bg-green-500 text-white p-2 w-full">Proceed to Payment</button>
-      </form>
+          <Link
+            to="/payment"
+            className={`block w-full text-center py-2 rounded-md ${
+              formData.fullName && formData.phone && formData.email
+                ? "bg-blue-600 text-white hover:bg-blue-700"
+                : "bg-gray-400 text-gray-700 cursor-not-allowed"
+            }`}
+            state={{ tour, totalPrice, numPeople, days }}
+            onClick={(e) => {
+              if (!formData.fullName || !formData.phone || !formData.email) {
+                e.preventDefault();
+                alert("Please fill in all fields before proceeding.");
+              }
+            }}
+          >
+            Proceed to Payment
+          </Link>
+        </div>
+      </div>
     </div>
   );
 };

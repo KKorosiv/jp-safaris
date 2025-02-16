@@ -3,19 +3,19 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
- "homepage": "https://KKorosiv.github.io/jp-travels",
-
+  "homepage": "https://KKorosiv.github.io/jp-travels",
   "scripts": {
-  "dev": "vite",
-  "build": "vite build",
-  "lint": "eslint .",
-  "preview": "vite preview",
-  "deploy": "gh-pages -d dist"
-},
+    "dev": "vite",
+    "build": "vite build",
+    "lint": "eslint .",
+    "preview": "vite preview",
+    "deploy": "gh-pages -d dist"
+  },
   "dependencies": {
     "@stripe/react-stripe-js": "^3.1.1",
     "@tailwindcss/vite": "^4.0.1",
     "aos": "^2.3.4",
+    "axios": "^1.7.9",
     "fs": "^0.0.1-security",
     "lucide-react": "^0.474.0",
     "path": "^0.12.7",

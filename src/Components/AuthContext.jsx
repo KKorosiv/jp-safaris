@@ -28,13 +28,12 @@ const AuthProvider = ({ children }) => {
 
 const useAuth = () => useContext(AuthContext);
 
-// ✅ Regular Protected Route (For logged-in users)
 const ProtectedRoute = ({ children }) => {
   const { user } = useAuth();
   return user ? children : <Navigate to="/login" />;
 };
 
-// ✅ Admin Protected Route (For admin-only access)
+
 const AdminProtectedRoute = ({ children }) => {
   const { user } = useAuth();
   return user && user.role === "admin" ? children : <Navigate to="/login" />;

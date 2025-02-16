@@ -1,46 +1,55 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 
 const Book = () => {
+  const location = useLocation();
+  const [tour, setTour] = useState(() => {
+    return location.state?.selectedTour || JSON.parse(localStorage.getItem("selectedTour")) || {};
+  });
+
+  useEffect(() => {
+    if (tour.title) {
+      localStorage.setItem("selectedTour", JSON.stringify(tour));
+    }
+  }, [tour]);
+
   return (
     <div className="bg-green-900 text-white py-16 px-6 md:px-20">
-      {/* Header Section */}
-      <div className="grid md:grid-cols-2 gap-8 mb-12">
-        <h2 className="text-4xl font-bold">
-          Effortlessly Book Your <br /> Safari Adventure Online
-        </h2>
-        <p className="text-lg">
-          Explore our diverse range of safari tours and book your adventure with ease. Our 
-          user-friendly online platform ensures a smooth booking process, allowing you to select 
-          your preferred tour dates and accommodations effortlessly.
-        </p>
-      </div>
+      <h2 className="text-4xl font-bold mb-6">Book Your Adventure</h2>
 
-      {/* Features Grid */}
-      <div className="grid md:grid-cols-2 gap-8 text-white mb-12">
-        <div>
-          <h3 className="text-2xl font-bold">Easy Booking</h3>
-          <p>Select your tour, choose dates, and book online.</p>
+      {tour.title && (
+        <div className="mb-6 p-4 bg-green-800 rounded-lg">
+          <h3 className="text-2xl font-bold">{tour.title}</h3>
+          <p className="text-lg">{tour.details}</p>
+          <p className="text-xl font-semibold">Fee: {tour.fee}</p>
         </div>
-        <div>
-          <h3 className="text-2xl font-bold">Tour Options</h3>
-          <p>Discover a variety of tours tailored to your interests.</p>
-        </div>
-      </div>
+      )}
 
-      {/* Image Grid + Booking CTA */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
-        <img src="/safari.jpg" alt="Safari Tour 1" className="rounded-xl" />
-        <img src="/leyoo.jpg" alt="Safari Tour 2" className="rounded-xl" />
-        <img src="/deers.jpg" alt="Safari Tour 3" className="rounded-xl" />
-        <img src="/brows.jpg" alt="Safari Tour 4" className="rounded-xl" />
-      </div>
+      <form className="bg-white text-black p-6 rounded-lg">
+        <label className="block mb-4">
+          Name:
+          <input type="text" className="w-full p-2 border rounded" required />
+        </label>
 
-      {/* CTA Button */}
-      <div className="text-center">
-        <button className="bg-yellow-500 text-black font-bold py-3 px-6 rounded-xl hover:bg-yellow-600 transition">
-          Book Now
+        <label className="block mb-4">
+          Email:
+          <input type="email" className="w-full p-2 border rounded" required />
+        </label>
+
+        <label className="block mb-4">
+          Tour Package:
+          <input type="text" className="w-full p-2 border rounded bg-gray-200" value={tour.title || ""} readOnly />
+        </label>
+
+        <label className="block mb-4">
+          Total Fee:
+          <input type="text" className="w-full p-2 border rounded bg-gray-200" value={tour.fee || ""} readOnly />
+        </label>
+
+        <button type="submit" className="bg-green-600 text-white px-6 py-2 rounded hover:bg-green-700">
+          Confirm Booking
         </button>
-      </div>
+      </form>
     </div>
   );
 };

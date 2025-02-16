@@ -3,7 +3,7 @@
 * {
     scroll-behavior: smooth;
   }
-/* Global Styles (if needed) */
+  
 body {
     font-family: 'Arial', sans-serif;
   }
@@ -12,20 +12,18 @@ body {
   }
   
   .typed-text::after {
-    content: "|";  /* Single cursor */
+    content: "|";  
     font-weight: bold;
     font-size: 1.2em;
-    color: #0a850d; /* Match your theme */
+    color: #0a850d; 
     animation: blink 0.7s infinite alternate;
   }
   
-  /* Blinking Animation */
   @keyframes blink {
     from { opacity: 1; }
     to { opacity: 0; }
   }
   
-  /* ✅ Button Styling */
   button {
     transition: all 0.3s ease-in-out;
     cursor: pointer;
@@ -35,17 +33,29 @@ body {
     transform: scale(1.05);
   }
   
-  /* ✅ Image Slideshow Styling */
   .slideshow img {
     transition: opacity 0.8s ease-in-out;
   }
   
-  /* ✅ Section Spacing */
   .section {
     padding: 40px 20px;
   }
+  .testimonial-card {
+    @apply bg-white shadow-md rounded-lg p-6 m-4;
+  }
   
-  /* ✅ Responsive Fixes */
+  .testimonial-card img {
+    @apply w-16 h-16 rounded-full object-cover;
+  }
+  
+  .testimonial-card h3 {
+    @apply text-xl font-semibold text-gray-800;
+  }
+  
+  .testimonial-card p {
+    @apply text-gray-600
+  }
+ 
   @media (max-width: 768px) {
     h1 {
       font-size: 2.5rem;
